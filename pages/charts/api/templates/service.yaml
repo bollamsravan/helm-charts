@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ include "api.fullname" . }}
+    tier: service
+    access: external
+  name: pages
+  namespace: {{.Release.Namespace}}
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: pages
+    tier: service
+  type: NodePort
